@@ -38,6 +38,11 @@ class CustomHandler(http.server.BaseHTTPRequestHandler):
     self.end_headers()
     db.remove(self.path[1:])
 
+  def do_OPTIONS(self):
+    self.send_response(200)
+    self.send_header('Access-Control-Allow-Origin', '*')
+    self.send_header('Access-Control-Allow-Methods', ' GET,POST,PATCH,DELETE')
+    self.end_headers()
 
 class TodoServer:
   def __init__(self):
